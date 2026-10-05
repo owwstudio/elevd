@@ -1,0 +1,60 @@
+{{ 'elevd.css' | asset_url | stylesheet_tag }}
+<section class="elevd-partners elevd-surface" aria-label="{{ section.settings.label | escape }}">
+  <ul class="elevd-partners__list" role="list">
+    {% for block in section.blocks %}
+      <li class="elevd-partners__item" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          {{ block.settings.image | image_url: width: 420 | image_tag: loading: 'lazy', alt: block.settings.name, class: 'elevd-partners__custom' }}
+        {% else %}
+          <span class="elevd-partners__logo" role="img" aria-label="{{ block.settings.name | escape }}">
+            {% case block.settings.logo %}
+              {% when 'odea' %}
+                <span class="elevd-odea-mark" aria-hidden="true">{% for i in (1..16) %}<span></span>{% endfor %}</span>
+                <img src="{{ 'elevd-odea-wordmark.svg' | asset_url }}" width="140" height="48" alt="">
+              {% when 'kintsugi' %}
+                <img src="{{ 'elevd-kintsugi-mark.svg' | asset_url }}" width="40" height="48" alt="">
+                <img src="{{ 'elevd-kintsugi-wordmark.svg' | asset_url }}" width="99" height="48" alt="">
+              {% when 'stack' %}
+                <img src="{{ 'elevd-stack-mark.svg' | asset_url }}" width="39" height="48" alt="">
+                <img src="{{ 'elevd-stack-wordmark.svg' | asset_url }}" width="149" height="48" alt="">
+              {% when 'magnolia' %}
+                <img src="{{ 'elevd-magnolia-mark.svg' | asset_url }}" width="48" height="48" alt="">
+                <img src="{{ 'elevd-magnolia-wordmark.svg' | asset_url }}" width="125" height="48" alt="">
+              {% when 'warpspeed' %}
+                <img src="{{ 'elevd-warpspeed-mark.svg' | asset_url }}" width="48" height="48" alt="">
+                <img src="{{ 'elevd-warpspeed-wordmark.svg' | asset_url }}" width="143" height="48" alt="">
+            {% endcase %}
+          </span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% schema %}
+{
+  "name": "Elevd partner logos",
+  "max_blocks": 8,
+  "settings": [{ "type": "text", "id": "label", "label": "Accessible section label", "default": "Our partners" }],
+  "blocks": [{
+    "type": "partner", "name": "Partner logo",
+    "settings": [
+      { "type": "text", "id": "name", "label": "Partner name", "default": "Partner" },
+      { "type": "image_picker", "id": "image", "label": "Custom logo" },
+      { "type": "select", "id": "logo", "label": "Original Figma logo", "default": "odea", "options": [
+        { "value": "odea", "label": "OdeaoLabs" },
+        { "value": "kintsugi", "label": "Kintsugi" },
+        { "value": "stack", "label": "Stacked Lab" },
+        { "value": "magnolia", "label": "Magnolia" },
+        { "value": "warpspeed", "label": "Warpspeed" }
+      ] }
+    ]
+  }],
+  "presets": [{ "name": "Elevd partner logos", "blocks": [
+    { "type": "partner", "settings": { "name": "OdeaoLabs", "logo": "odea" } },
+    { "type": "partner", "settings": { "name": "Kintsugi", "logo": "kintsugi" } },
+    { "type": "partner", "settings": { "name": "Stacked Lab", "logo": "stack" } },
+    { "type": "partner", "settings": { "name": "Magnolia", "logo": "magnolia" } },
+    { "type": "partner", "settings": { "name": "Warpspeed", "logo": "warpspeed" } }
+  ] }]
+}
+{% endschema %}

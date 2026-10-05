@@ -1,0 +1,5 @@
+{%- if url != blank -%}
+  <a class="elevd-nav-item" href="{{ url }}">{{ label | escape }}{% if number != blank %}<sup>{{ number | escape }}</sup>{% endif %}</a>
+{%- else -%}
+  <span class="elevd-nav-item">{{ label | escape }}{% if number != blank %}<sup>{{ number | escape }}</sup>{% endif %}</span>
+{%- endif -%}

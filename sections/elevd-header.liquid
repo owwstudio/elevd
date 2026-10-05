@@ -1,0 +1,44 @@
+{{ 'elevd.css' | asset_url | stylesheet_tag }}
+<header class="elevd-header elevd-surface">
+  <nav class="elevd-header__nav" aria-label="Main navigation">
+    {% for block in section.blocks %}
+      <div {{ block.shopify_attributes }}>
+        {% render 'elevd-nav-item', label: block.settings.label, number: block.settings.number, url: block.settings.url %}
+      </div>
+    {% endfor %}
+  </nav>
+  <a class="elevd-brand" href="{{ routes.root_url }}" aria-label="{{ section.settings.brand_name | escape }} home">
+    <img src="{{ 'elevd-brandmark.svg' | asset_url }}" width="27" height="24" alt="">
+    <span>{{ section.settings.brand_name | escape }}</span>
+  </a>
+  {% if section.settings.contact_url != blank %}
+    <a class="elevd-contact" href="{{ section.settings.contact_url }}">{{ section.settings.contact_label | escape }}</a>
+  {% else %}
+    <span class="elevd-contact">{{ section.settings.contact_label | escape }}</span>
+  {% endif %}
+</header>
+{% schema %}
+{
+  "name": "Elevd header",
+  "enabled_on": { "groups": ["header"] },
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "elevd.ai" },
+    { "type": "text", "id": "contact_label", "label": "Contact label", "default": "Get in Touch" },
+    { "type": "url", "id": "contact_url", "label": "Contact link", "info": "Choose a destination when the contact section or page is ready." }
+  ],
+  "blocks": [{
+    "type": "link", "name": "Navigation item",
+    "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "About Us" },
+      { "type": "text", "id": "number", "label": "Small number", "default": "23" },
+      { "type": "url", "id": "url", "label": "Destination", "info": "Without a destination, this item is displayed as text." }
+    ]
+  }],
+  "presets": [{ "name": "Elevd header", "blocks": [
+    { "type": "link", "settings": { "label": "Future Trends" } },
+    { "type": "link", "settings": { "label": "About Us" } },
+    { "type": "link", "settings": { "label": "Inside" } }
+  ] }]
+}
+{% endschema %}

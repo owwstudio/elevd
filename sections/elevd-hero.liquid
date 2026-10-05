@@ -1,0 +1,62 @@
+{{ 'elevd.css' | asset_url | stylesheet_tag }}
+<section class="elevd-hero elevd-surface" aria-labelledby="ElevdHeading-{{ section.id }}">
+  <div class="elevd-hero__intro">
+    <h1 id="ElevdHeading-{{ section.id }}" class="elevd-hero__heading">
+      <span class="elevd-hero__first">{{ section.settings.first_word | escape }}</span>
+      <span class="elevd-hero__middle">{{ section.settings.middle_word | escape }}</span>
+      <span class="elevd-hero__last">{{ section.settings.last_word | escape }}</span>
+    </h1>
+    <span class="elevd-hero__sparkle" aria-hidden="true"><img src="{{ 'elevd-sparkle.svg' | asset_url }}" width="32" height="32" alt=""></span>
+    {% if section.settings.image == blank %}
+      <div class="elevd-hero__roof" aria-hidden="true">
+        <img src="{{ 'elevd-hero-roof.webp' | asset_url }}" width="4096" height="3883" alt="" fetchpriority="high">
+      </div>
+    {% endif %}
+    <div class="elevd-hero__aside">
+      <nav class="elevd-hero__links" aria-label="Explore Elevd">
+        {% render 'elevd-nav-item', label: section.settings.about_label, number: '23', url: section.settings.about_url %}
+        {% render 'elevd-nav-item', label: section.settings.how_label, number: '23', url: section.settings.how_url %}
+      </nav>
+      <div class="elevd-hero__story">
+        <div class="elevd-hero__community">
+          <div class="elevd-hero__avatars" aria-hidden="true">
+            <img src="{{ 'elevd-avatar-1.png' | asset_url }}" width="40" height="40" alt="">
+            <img src="{{ 'elevd-avatar-2.png' | asset_url }}" width="40" height="40" alt="">
+            <img src="{{ 'elevd-avatar-3.png' | asset_url }}" width="40" height="40" alt="">
+          </div>
+          <span>{{ section.settings.community | escape }}</span>
+        </div>
+        <div class="elevd-hero__description">{{ section.settings.description }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="elevd-hero__media">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2800 | image_tag: widths: '750, 1100, 1500, 2000, 2800', sizes: '97vw', loading: 'eager', fetchpriority: 'high', class: 'elevd-hero__custom-image', alt: section.settings.image_alt }}
+    {% else %}
+      <img class="elevd-hero__house" src="{{ 'elevd-hero-house.webp' | asset_url }}" width="4096" height="3883" alt="{{ section.settings.image_alt | escape }}" fetchpriority="high">
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Elevd hero",
+  "tag": "div",
+  "class": "elevd-hero-section",
+  "enabled_on": { "templates": ["index"] },
+  "settings": [
+    { "type": "text", "id": "first_word", "label": "First heading line", "default": "elevd." },
+    { "type": "text", "id": "middle_word", "label": "Second heading line", "default": "smarter" },
+    { "type": "text", "id": "last_word", "label": "Third heading line", "default": "homes" },
+    { "type": "image_picker", "id": "image", "label": "Replacement hero image", "info": "The original Figma composition is used by default. A replacement uses a single photo without the separate roof layer." },
+    { "type": "text", "id": "image_alt", "label": "Image description", "default": "Modern two-storey home with concrete cladding, warm timber and a garden" },
+    { "type": "text", "id": "about_label", "label": "First link label", "default": "About Us" },
+    { "type": "url", "id": "about_url", "label": "First link destination" },
+    { "type": "text", "id": "how_label", "label": "Second link label", "default": "How It Works" },
+    { "type": "url", "id": "how_url", "label": "Second link destination" },
+    { "type": "text", "id": "community", "label": "Community label", "default": "+34K" },
+    { "type": "richtext", "id": "description", "label": "Introduction", "default": "<p>Not just a home. Not just smart.<br>Meet your AI co-designer — crafting spaces that adapt, learn, and grow with you.</p>" }
+  ],
+  "presets": [{ "name": "Elevd hero" }]
+}
+{% endschema %}

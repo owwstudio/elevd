@@ -1,0 +1,17 @@
+{
+  "name": "Elevd header",
+  "type": "header",
+  "sections": {
+    "elevd_header": {
+      "type": "elevd-header",
+      "blocks": {
+        "trends": { "type": "link", "settings": { "label": "Future Trends", "number": "23" } },
+        "about": { "type": "link", "settings": { "label": "About Us", "number": "23" } },
+        "inside": { "type": "link", "settings": { "label": "Inside", "number": "23" } }
+      },
+      "block_order": ["trends", "about", "inside"],
+      "settings": { "brand_name": "elevd.ai", "contact_label": "Get in Touch" }
+    }
+  },
+  "order": ["elevd_header"]
+}

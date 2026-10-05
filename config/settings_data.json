@@ -1,7 +1,7 @@
 {
-  "current": "Dawn",
+  "current": "Elevd",
   "presets": {
-    "Dawn": {
+    "Elevd": {
       "logo_width": 90,
       "customer_account_menu": "customer-account-main-menu",
       "color_schemes": {
@@ -69,7 +69,7 @@
       "spacing_sections": 0,
       "spacing_grid_horizontal": 8,
       "spacing_grid_vertical": 8,
-      "animations_reveal_on_scroll": true,
+      "animations_reveal_on_scroll": false,
       "animations_hover_elements": "none",
       "buttons_border_thickness": 1,
       "buttons_border_opacity": 100,

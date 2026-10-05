@@ -330,7 +330,11 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {% sections 'header-group' %}
+    {% if template.name == 'index' %}
+      {% sections 'elevd-header-group' %}
+    {% else %}
+      {% sections 'header-group' %}
+    {% endif %}
 
     <main
       id="MainContent"
@@ -342,7 +346,9 @@
       {{ content_for_layout }}
     </main>
 
-    {% sections 'footer-group' %}
+    {% unless template.name == 'index' %}
+      {% sections 'footer-group' %}
+    {% endunless %}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
