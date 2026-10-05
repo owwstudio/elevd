@@ -53,10 +53,55 @@
       "settings": {
         "label": "Our partners"
       }
+    },
+    "elevd_day": {
+      "type": "elevd-day",
+      "blocks": {
+        "morning": {
+          "type": "scene",
+          "settings": {
+            "label": "Morning",
+            "title": "A gentler start.",
+            "description": "Daylight fills the room, setting a calm rhythm for the day ahead.",
+            "status": "Natural daylight \u00b7 A fresh start",
+            "mode": "morning",
+            "image_alt": "Modern concrete and timber living room in soft morning sunlight"
+          }
+        },
+        "focus": {
+          "type": "scene",
+          "settings": {
+            "label": "Focus",
+            "title": "Space for your best ideas.",
+            "description": "Balanced light and a quiet atmosphere help you settle into the things that matter.",
+            "status": "Balanced light \u00b7 Ready to focus",
+            "mode": "focus",
+            "image_alt": "The same concrete and timber living room in balanced midday light"
+          }
+        },
+        "evening": {
+          "type": "scene",
+          "settings": {
+            "label": "Evening",
+            "title": "Come home to calm.",
+            "description": "Warm lighting softens the room as your home settles into the evening with you.",
+            "status": "Warm lighting \u00b7 Time to unwind",
+            "mode": "evening",
+            "image_alt": "The same living room at blue hour with warm evening lights"
+          }
+        }
+      },
+      "block_order": [
+        "morning",
+        "focus",
+        "evening"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "elevd_hero",
-    "elevd_partners"
+    "elevd_partners",
+    "elevd_day"
   ]
 }

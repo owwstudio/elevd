@@ -282,6 +282,7 @@
 
     {% if template.name == 'index' %}
       {% render 'elevd-intro-head' %}
+      {% render 'elevd-scroll-head' %}
     {% endif %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}

@@ -1,0 +1,53 @@
+.elevd-day {
+  --elevd-day-accent: #fe5c38;
+  color: #fff;
+  background: #202020;
+  font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -.02em;
+}
+.elevd-day__stage { padding: clamp(28px, 4vw, 64px) 2.222vw; }
+.elevd-day__heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 28px; }
+.elevd-day__eyebrow { margin: 0 0 12px; color: var(--elevd-day-accent); font-size: 14px; font-weight: 500; letter-spacing: .01em; }
+.elevd-day h2 { margin: 0; color: inherit; font: inherit; font-size: clamp(36px, 4.5vw, 72px); font-weight: 500; line-height: 1; letter-spacing: -.055em; }
+.elevd-day__intro { max-width: 290px; margin: 0; color: #b8b8b8; font-size: 16px; line-height: 1.35; }
+.elevd-day__nav { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 24px; border-top: 1px solid #505050; }
+.elevd-day__nav a { display: flex; align-items: center; gap: 12px; padding: 16px 0; color: #fff; font-size: 18px; text-decoration: none; }
+.elevd-day__nav a:focus-visible { outline: 2px solid var(--elevd-day-accent); outline-offset: -2px; }
+.elevd-day__number { color: #b8b8b8; font-size: 11px; letter-spacing: .01em; }
+.elevd-day__link-arrow { margin-left: auto; margin-right: 20px; color: var(--elevd-day-accent); }
+.elevd-day__nav a[aria-current="step"] { color: var(--elevd-day-accent); }
+.elevd-day__track { display: block; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #505050; }
+.elevd-day__track span { display: block; width: 100%; height: 100%; background: var(--elevd-day-accent); transform: scaleX(0); transform-origin: left; }
+.elevd-day__scenes { display: grid; gap: 64px; }
+.elevd-day__scene { scroll-margin-top: 24px; }
+.elevd-day__image { overflow: hidden; aspect-ratio: 1672 / 941; border-radius: 20px; }
+.elevd-day__image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.elevd-day__caption { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding-top: 24px; }
+.elevd-day__scene-label { margin: 0 0 8px; color: var(--elevd-day-accent); font-size: 12px; letter-spacing: .02em; }
+.elevd-day h3 { margin: 0; color: inherit; font: inherit; font-size: clamp(26px, 2.6vw, 42px); font-weight: 500; line-height: 1.05; letter-spacing: -.04em; }
+.elevd-day__detail { justify-self: end; width: min(100%, 390px); }
+.elevd-day__detail > p:first-child { margin: 0; font-size: 16px; line-height: 1.35; color: #d1d1d1; }
+.elevd-day__status { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; font-size: 12px; color: #b8b8b8; letter-spacing: .01em; }
+.elevd-day__status span { display: block; flex: none; width: 5px; height: 5px; background: var(--elevd-day-accent); border-radius: 50%; }
+.elevd-day__scroll-note { display: none; }
+.elevd-day--enhanced .elevd-day__stage { height: 100svh; display: flex; flex-direction: column; padding-block: 28px 20px; }
+.elevd-day--enhanced .elevd-day__heading { flex: none; margin-bottom: 20px; }
+.elevd-day--enhanced .elevd-day__nav { flex: none; margin-bottom: 16px; }
+.elevd-day--enhanced .elevd-day__scenes { position: relative; flex: 1; min-height: 0; display: block; }
+.elevd-day--enhanced .elevd-day__scene { position: absolute; inset: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.elevd-day--enhanced .elevd-day__image { aspect-ratio: auto; min-height: 0; }
+.elevd-day--enhanced .elevd-day__caption { padding-top: 18px; }
+.elevd-day--enhanced .elevd-day__scroll-note { display: flex; align-items: center; gap: 20px; margin: 16px 0 0; color: #b8b8b8; font-size: 11px; letter-spacing: .02em; }
+.elevd-day__scroll-note span { color: var(--elevd-day-accent); }
+@media (max-width: 899px) {
+  .elevd-day__stage { padding: 40px 20px; }
+  .elevd-day__heading { display: block; }
+  .elevd-day__intro { max-width: 330px; margin-top: 20px; font-size: 14px; }
+  .elevd-day__nav a { gap: 6px; font-size: 16px; }
+  .elevd-day__link-arrow { margin-right: 8px; }
+  .elevd-day__scenes { gap: 48px; }
+  .elevd-day__image { aspect-ratio: 4 / 3; border-radius: 14px; }
+  .elevd-day__caption { grid-template-columns: 1fr; gap: 18px; padding-top: 20px; }
+  .elevd-day__detail { justify-self: start; }
+  .elevd-day__detail > p:first-child { font-size: 14px; }
+}

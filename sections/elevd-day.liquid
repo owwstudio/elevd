@@ -1,0 +1,93 @@
+<section id="ElevdDay-{{ section.id }}" class="elevd-day" data-elevd-day aria-labelledby="ElevdDayHeading-{{ section.id }}">
+  <div class="elevd-day__stage" data-day-stage>
+    <div class="elevd-day__heading">
+      <div>
+        <p class="elevd-day__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h2 id="ElevdDayHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      </div>
+      <p class="elevd-day__intro">{{ section.settings.description | escape }}</p>
+    </div>
+    <nav class="elevd-day__nav" aria-label="Explore your day">
+      {% for block in section.blocks %}
+        <a href="#ElevdScene-{{ section.id }}-{{ forloop.index0 }}" data-day-link="{{ forloop.index0 }}">
+          <span class="elevd-day__number">0{{ forloop.index }}</span> {{ block.settings.label | escape }}
+          <span class="elevd-day__link-arrow" aria-hidden="true">↗</span>
+        </a>
+      {% endfor %}
+      <div class="elevd-day__track" aria-hidden="true"><span data-day-progress></span></div>
+    </nav>
+    <div class="elevd-day__scenes" data-day-scenes>
+      {% for block in section.blocks %}
+        {% liquid
+          case block.settings.mode
+            when 'focus'
+              assign fallback_image = 'elevd-room-focus.webp'
+            when 'evening'
+              assign fallback_image = 'elevd-room-evening.webp'
+            else
+              assign fallback_image = 'elevd-room-morning.webp'
+          endcase
+        %}
+        <article id="ElevdScene-{{ section.id }}-{{ forloop.index0 }}" class="elevd-day__scene" data-day-scene data-mode="{{ block.settings.mode }}" aria-labelledby="ElevdSceneHeading-{{ section.id }}-{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="elevd-day__image">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 2000 | image_tag: widths: '550, 900, 1400, 2000', sizes: '(min-width: 900px) 94vw, 100vw', loading: 'lazy', alt: block.settings.image_alt }}
+            {% else %}
+              <img src="{{ fallback_image | asset_url }}" width="1672" height="941" loading="lazy" alt="{{ block.settings.image_alt | escape }}">
+            {% endif %}
+          </div>
+          <div class="elevd-day__caption">
+            <div>
+              <p class="elevd-day__scene-label">0{{ forloop.index }} / {{ block.settings.label | escape }}</p>
+              <h3 id="ElevdSceneHeading-{{ section.id }}-{{ forloop.index0 }}">{{ block.settings.title | escape }}</h3>
+            </div>
+            <div class="elevd-day__detail">
+              <p>{{ block.settings.description | escape }}</p>
+              <p class="elevd-day__status"><span aria-hidden="true"></span>{{ block.settings.status | escape }}</p>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+    <p class="elevd-day__scroll-note" data-day-scroll-note aria-hidden="true">Scroll to experience your day <span>↓</span></p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Elevd day with you",
+  "tag": "div",
+  "class": "elevd-day-section",
+  "enabled_on": { "templates": ["index"] },
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A day with elevd." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One home. Every rhythm." },
+    { "type": "textarea", "id": "description", "label": "Introduction", "default": "From the first light to the last quiet moment. A home that moves with you." }
+  ],
+  "blocks": [{
+    "type": "scene",
+    "name": "Room scene",
+    "settings": [
+      { "type": "select", "id": "mode", "label": "Default scene image", "options": [
+        { "value": "morning", "label": "Morning" },
+        { "value": "focus", "label": "Focus" },
+        { "value": "evening", "label": "Evening" }
+      ], "default": "morning" },
+      { "type": "text", "id": "label", "label": "Scene label", "default": "Morning" },
+      { "type": "text", "id": "title", "label": "Scene heading", "default": "A gentler start." },
+      { "type": "textarea", "id": "description", "label": "Scene description", "default": "Daylight fills the room, setting a calm rhythm for the day ahead." },
+      { "type": "text", "id": "status", "label": "Scene status", "default": "Natural daylight · A fresh start" },
+      { "type": "image_picker", "id": "image", "label": "Replacement image", "info": "The generated room scene is used when no replacement is selected." },
+      { "type": "text", "id": "image_alt", "label": "Image description", "default": "Modern concrete and timber living room in soft morning sunlight" }
+    ]
+  }],
+  "presets": [{
+    "name": "Elevd day with you",
+    "blocks": [
+      { "type": "scene", "settings": { "mode": "morning", "label": "Morning", "title": "A gentler start." } },
+      { "type": "scene", "settings": { "mode": "focus", "label": "Focus", "title": "Space for your best ideas.", "description": "Balanced light and a quiet atmosphere help you settle into the things that matter.", "status": "Balanced light · Ready to focus", "image_alt": "The same concrete and timber living room in balanced midday light" } },
+      { "type": "scene", "settings": { "mode": "evening", "label": "Evening", "title": "Come home to calm.", "description": "Warm lighting softens the room as your home settles into the evening with you.", "status": "Warm lighting · Time to unwind", "image_alt": "The same living room at blue hour with warm evening lights" } }
+    ]
+  }]
+}
+{% endschema %}
