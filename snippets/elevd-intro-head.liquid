@@ -1,0 +1,25 @@
+{{ 'elevd-intro.css' | asset_url | stylesheet_tag }}
+<script>
+  (() => {
+    const root = document.documentElement;
+    try {
+      const replay = new URLSearchParams(location.search).get('elevd_intro') === 'replay';
+      let seen = false;
+      try { seen = sessionStorage.getItem('elevd:intro:v1') === 'seen'; } catch (_) {}
+      const navigation = performance.getEntriesByType('navigation')[0];
+      if (Shopify.designMode || matchMedia('(prefers-reduced-motion: reduce)').matches || location.hash ||
+          navigation?.type === 'back_forward' || (seen && !replay)) return;
+      root.classList.add('elevd-intro-active');
+      root.dataset.elevdIntro = 'loading';
+      // The storefront must remain usable if the controller or assets fail to load.
+      window.elevdIntroWatchdog = setTimeout(() => {
+        if (window.elevdFinishIntro) window.elevdFinishIntro();
+        else {
+          root.classList.remove('elevd-intro-active', 'elevd-intro-ready');
+          root.dataset.elevdIntro = 'fallback';
+        }
+      }, 8000);
+    } catch (_) { root.classList.remove('elevd-intro-active'); }
+  })();
+</script>
+<script src="{{ 'elevd-intro.js' | asset_url }}" defer="defer"></script>

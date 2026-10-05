@@ -1,0 +1,27 @@
+[
+  {
+    "id": "morning",
+    "label": "Morning",
+    "title": "A gentler start.",
+    "description": "Daylight fills the room, setting a calm rhythm for the day ahead.",
+    "status": "Natural daylight · A fresh start",
+    "image": "elevd-room-morning.webp"
+  },
+  {
+    "id": "focus",
+    "label": "Focus",
+    "title": "Space for your best ideas.",
+    "description": "Balanced light and a quiet atmosphere help you settle into the things that matter.",
+    "status": "Balanced light · Ready to focus",
+    "image": "elevd-room-focus.webp"
+  },
+  {
+    "id": "evening",
+    "label": "Evening",
+    "title": "Come home to calm.",
+    "description": "Warm lighting softens the room as your home settles into the evening with you.",
+    "status": "Warm lighting · Time to unwind",
+    "image": "elevd-room-evening.webp"
+  }
+]
+

@@ -1,0 +1,61 @@
+.elevd-intro { display: none; }
+.elevd-intro-active { overflow: hidden; }
+.elevd-intro-active .elevd-intro {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  color: #fff;
+  font-family: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.elevd-intro .elevd-intro__curtain { display: block; position: absolute; inset: 0; background: #202020; }
+.elevd-intro__status {
+  position: absolute;
+  top: calc(50% + 66px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .015em;
+}
+.elevd-intro__status span { color: #fe5c38; }
+.elevd-intro__skip {
+  position: absolute;
+  bottom: max(96px, calc(env(safe-area-inset-bottom) + 28px));
+  right: 28px;
+  display: inline-flex;
+  gap: 20px;
+  align-items: center;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.elevd-intro__skip span { color: #fe5c38; }
+.elevd-intro__skip:focus-visible { outline: 2px solid #fe5c38; outline-offset: 6px; }
+.elevd-intro-active .elevd-header {
+  z-index: 9999;
+  background: transparent;
+  border-color: transparent;
+}
+.elevd-intro-active .elevd-header__nav,
+.elevd-intro-active .elevd-contact { visibility: hidden; }
+.elevd-intro-active .elevd-brand {
+  visibility: hidden;
+  transform-origin: center;
+  color: #fff;
+  pointer-events: none;
+  will-change: transform;
+}
+.elevd-intro-ready .elevd-brand { visibility: visible; }
+.elevd-intro-active .elevd-hero__heading > span,
+.elevd-intro-active .elevd-hero__aside,
+.elevd-intro-active .elevd-hero__sparkle { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .elevd-intro-active { overflow: visible; }
+}
