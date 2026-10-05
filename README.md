@@ -26,11 +26,13 @@ Development targets the unpublished **Elevd** theme (`155207008454`). Do not pub
 - The home page footer will be added with the corresponding Figma section.
 - Custom animation is deferred; Dawn scroll reveal is disabled in the Elevd preset.
 
-Figma uses **Helvetica Now Display**. The theme currently falls back to Helvetica Neue, Helvetica and Arial. Supply a properly licensed webfont before final typography matching.
+The theme uses **Helvetica Now Display** from the supplied font files. Seven upright weights are registered: Thin (265, matching the source font metadata), Light (300), Regular (400), Medium (500), Bold (700), ExtraBold (800) and Black (900). Regular and Bold are preloaded; other weights load when used. Dawn's global body and heading font families and the Elevd sections use this family.
 
 ## Assets
 
 Assets are sourced from the linked Figma frame. The two hero layers are encoded as 2400px WebP delivery assets with the original aspect ratio and transparency. Downloaded original PNGs are preserved in the ignored `.source-assets/` folder. SVG logo and icon files retain their original markup and dimensions.
+
+Supplied TTF font files are converted to WOFF2 without subsetting. Character maps, glyph order and advance metrics are verified against the originals. Source fonts are preserved in the ignored `.source-assets/fonts/` folder.
 
 ## Validation
 
@@ -38,7 +40,7 @@ Assets are sourced from the linked Figma frame. The two hero layers are encoded 
 - Shopify renders the draft successfully through the CLI preview.
 - Browser checks at 1440px desktop and 390px mobile: all visible source assets load, no horizontal overflow, one H1, and no page errors.
 - Screenshots are stored locally in the ignored `.preview/` folder.
-- Typography is approximate until the Figma webfont is supplied.
+- Helvetica Now Display is installed with the supplied weights; font loading and responsive layout are verified in the Shopify preview.
 
 ## Continuing the page
 
