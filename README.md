@@ -32,6 +32,14 @@ Figma uses **Helvetica Now Display**. The theme currently falls back to Helvetic
 
 Assets are sourced from the linked Figma frame. The two hero layers are encoded as 2400px WebP delivery assets with the original aspect ratio and transparency. Downloaded original PNGs are preserved in the ignored `.source-assets/` folder. SVG logo and icon files retain their original markup and dimensions.
 
+## Validation
+
+- Shopify Theme Check: zero errors; nine warnings inherited unchanged from Dawn.
+- Shopify renders the draft successfully through the CLI preview.
+- Browser checks at 1440px desktop and 390px mobile: all visible source assets load, no horizontal overflow, one H1, and no page errors.
+- Screenshots are stored locally in the ignored `.preview/` folder.
+- Typography is approximate until the Figma webfont is supplied.
+
 ## Continuing the page
 
 Implement the About section next, followed by feature navigation, the dark storytelling section, user stories and the footer. Keep each major section independently configurable in Shopify.
