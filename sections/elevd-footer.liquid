@@ -1,0 +1,58 @@
+{{ 'elevd-footer.css' | asset_url | stylesheet_tag }}
+<div class="elevd-footer elevd-surface" style="--footer-arrow: url('{{ 'elevd-footer-arrow-large.svg' | asset_url }}');">
+  <div class="elevd-footer__canvas">
+    <p class="elevd-footer__wordmark" aria-hidden="true">{{ section.settings.decorative_text | escape }}</p>
+    <div class="elevd-footer__layout">
+      <div class="elevd-footer__top">
+        <h2>{{ section.settings.heading | escape }}</h2>
+        <span class="elevd-footer__arrow" aria-hidden="true"></span>
+      </div>
+      <div class="elevd-footer__bottom">
+        <div class="elevd-footer__legal">
+          <span class="elevd-footer__label elevd-footer__terms">
+            <span>{{ section.settings.terms_label | escape }}</span>
+            <img src="{{ 'elevd-footer-arrow-up-right.svg' | asset_url }}" width="16" height="16" loading="lazy" alt="">
+          </span>
+          <span class="elevd-footer__label">{{ section.settings.copyright | escape }}</span>
+          <span class="elevd-footer__label">{{ section.settings.technology | escape }}</span>
+        </div>
+        <div class="elevd-footer__social">
+          {% for block in section.blocks %}
+            <span class="elevd-footer__label" {{ block.shopify_attributes }}>
+              <span>{{ block.settings.label | escape }}</span>
+              <img src="{{ 'elevd-footer-arrow-up-right.svg' | asset_url }}" width="16" height="16" loading="lazy" alt="">
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Elevd footer",
+  "tag": "footer",
+  "class": "elevd-footer-section",
+  "enabled_on": { "groups": ["footer"] },
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Start Designing Spaces That Think, Learn, and Evolve With You." },
+    { "type": "text", "id": "decorative_text", "label": "Decorative text", "default": "co-designed by AI." },
+    { "type": "text", "id": "terms_label", "label": "Terms label", "default": "Term And Conditions" },
+    { "type": "text", "id": "copyright", "label": "Copyright", "default": "2025 Copyright" },
+    { "type": "text", "id": "technology", "label": "Technology label", "default": "Artificial Intelligence" }
+  ],
+  "blocks": [{
+    "type": "social",
+    "name": "Social label",
+    "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Twitter" }
+    ]
+  }],
+  "presets": [{ "name": "Elevd footer", "blocks": [
+    { "type": "social", "settings": { "label": "Twitter" } },
+    { "type": "social", "settings": { "label": "Instagram" } },
+    { "type": "social", "settings": { "label": "Linkedin" } }
+  ] }]
+}
+{% endschema %}

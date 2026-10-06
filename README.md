@@ -13,9 +13,9 @@ shopify theme dev --environment development
 shopify theme check
 ```
 
-Development targets the unpublished **Elevd Motion Preview** theme (`155209498822`). The active Elevd theme is `155207008454`. Verify changes on the draft, then deploy only the requested files to the active theme; preserve Theme Editor settings.
+Development targets **Elevd Dev** (`155243708614`), which is currently the live theme. **Elevd Motion Preview** (`155209498822`) and the original **Elevd** (`155207008454`) are unpublished. Use this same **Elevd Dev** theme for all subsequent changes and previews; do not create a new theme for each section or iteration. Upload only the requested files and preserve Theme Editor settings. When adding sections, merge the home template with its current remote settings.
 
-[Theme Editor](https://elevd-ai.myshopify.com/admin/themes/155209498822/editor) · [Shopify preview](https://elevd-ai.myshopify.com/?preview_theme_id=155209498822&elevd_intro=replay)
+[Theme Editor](https://elevd-ai.myshopify.com/admin/themes/155243708614/editor) · [Shopify preview](https://elevd-ai.myshopify.com/?preview_theme_id=155243708614&elevd_intro=replay)
 
 ## First implementation
 
@@ -23,7 +23,7 @@ Development targets the unpublished **Elevd Motion Preview** theme (`15520949882
 - Dawn commerce templates remain available on other routes.
 - Text, destinations, hero replacement image and partner blocks are editable in the Theme Editor.
 - Navigation labels without configured destinations intentionally render as text. Connect them when the remaining sections/pages exist.
-- The home page footer will be added with the corresponding Figma section.
+- The home page uses its own Elevd footer group; footer copy and social labels are editable in the Theme Editor.
 - The home page has a signature introduction: the actual navbar logo starts at the center of a dark screen, then travels into its final position as the hero appears.
 
 ## Signature introduction
@@ -57,6 +57,11 @@ Supplied TTF font files are converted to WOFF2 without subsetting. Character map
 ## Validation
 
 - Shopify Theme Check: zero errors; nine warnings inherited unchanged from Dawn.
+- Footer verified on Elevd Dev at 320, 390, 600, 768, 900, 1024, 1440, 1920 and 2560px: both original SVG assets load in all five slots with correct geometry and orientation, the 1440px composition matches Figma, the decorative text is intentionally clipped, and there is no horizontal overflow or page error. One footer landmark renders outside main content, after user stories. Screenshots are in `.preview/footer-{desktop,tablet,mobile,wide}.png`.
+- User stories section verified on Elevd Dev at 320, 390, 600, 768, 900, 1024, 1440, 1920 and 2560px: all five portraits, both SVG masks and both dividers load, source crops and key positions match Figma at 1440px, no horizontal overflow or page errors, and no new interaction or animation. Existing remote home settings are preserved. Screenshots are in `.preview/use-{desktop,tablet,mobile,wide}.png`.
+- Dark story section verified on Elevd Dev at 320, 390, 600, 768, 1024, 1100, 1440, 1920 and 2560px: all five photos, both icons and seven SVG masks/dividers load, Figma crops match at 1440px, no horizontal overflow or page errors, and no new interaction or animation. Screenshots are in `.preview/story-{desktop,tablet,mobile,wide}.png`.
+- Logo-loop section verified on Elevd Dev at 320, 390, 600, 768, 1024, 1100, 1280, 1440, 1920 and 2560px: all five labels and four original 24px cube separators render, no horizontal overflow or page errors, and no animation or links. Screenshots are in `.preview/logo-loop-{desktop-strip,tablet,mobile}.png`.
+- About section verified in the unpublished Elevd Dev draft at 320, 390, 600, 768, 1024, 1440, 1920 and 2560px: no horizontal overflow, all source assets and masks load, original Figma photo crops are preserved, and carousel navigation remains static. Desktop, tablet and mobile screenshots are in `.preview/about-{desktop,tablet,mobile}.png`.
 - Shopify renders the draft successfully through the CLI preview.
 - Browser checks at 1440px desktop and 390px mobile: all visible source assets load, no horizontal overflow, one H1, and no page errors.
 - Screenshots are stored locally in the ignored `.preview/` folder.
@@ -67,6 +72,18 @@ Supplied TTF font files are converted to WOFF2 without subsetting. Character map
 
 ## Continuing the page
 
-Implement the About section next, followed by feature navigation, the dark storytelling section, user stories and the footer. Keep each major section independently configurable in Shopify.
+The About section follows the day scenes and matches Figma node `522:566`. It includes the large wordmark/tagline, layered grain brand card, two photo features, navigation arrows and three pagination dots. It is a static carousel composition; slide changes, dragging, autoplay and navigation interactions are deferred. Copy, captions and replacement photos are independently configurable in the Theme Editor.
+
+At 900px and above, the editorial composition scales with the viewport up to a centered 1920px canvas. Tablet uses a compact three-card layout, and mobile stacks the brand card above the two photo features. Source photo crops and grain layers match Figma; delivery WebP files preserve the original pixels, with original PNGs kept in `.source-assets/about/`.
+
+The logo-loop section follows About and matches Figma node `522:605`: five capability labels separated by the original orange cube SVG. Desktop preserves the single row, while tablet and mobile wrap complete label/icon groups. Labels and order are editable in the Theme Editor. The strip is static; looping animation and interactions are deferred.
+
+The dark story section follows the logo-loop and matches Figma node `526:660`. It includes the two home images, two portraits, highlighted statement, smiley/crosshair icons, oversized 2025/elevd typography, and roof photograph. Desktop uses an editorial grid, tablet reflows the content, and mobile stacks the images and narrative. Copy and replacement images are independently configurable in the Theme Editor. Figma source crops are preserved; delivery images use full-resolution quality-94 WebP, with original PNGs in `.source-assets/story/`. The existing portrait from About is reused. This section is static; interaction and animation are deferred.
+
+The user stories section follows the dark story and matches Figma node `528:756`: the “How People Use elevd.” introduction, five numbered name/topic rows, five masked portraits, fine dividers and a static contact label. Desktop preserves the two-column composition up to a centered 1920px canvas. Tablet keeps paired name/topic rows; mobile stacks each pair and fits all five portraits across the available width. Heading, description, contact label, story order, names, topics and replacement portraits are editable in the Theme Editor. The first two portraits and their masks are reused from existing sections; new delivery photos preserve full source resolution, with original PNGs in `.source-assets/use/`. Interactions remain deferred.
+
+The home page footer matches Figma node `533:789`: the large invitation headline, original arrow SVGs, cropped “co-designed by AI.” background typography, legal information and three social labels. It uses the `elevd-footer-group` outside the main content, with the Dawn footer group retained on other templates. Desktop scales to a centered 1920px canvas; tablet stacks the bottom groups and mobile reflows the legal labels into a compact grid. All copy and social label order are editable in the Theme Editor. The decorative wordmark is hidden from assistive technology. The footer is static; contact, legal and social navigation interactions are deferred.
+
+Each major section remains independently configurable in Shopify.
 
 The original Dawn documentation is preserved in `README.dawn.md`, and its license is in `LICENSE.md`.

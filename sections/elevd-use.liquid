@@ -1,0 +1,103 @@
+{{ 'elevd-use.css' | asset_url | stylesheet_tag }}
+<section id="ElevdUse-{{ section.id }}" class="elevd-use elevd-surface" aria-labelledby="ElevdUseHeading-{{ section.id }}" style="--use-woman-mask: url('{{ 'elevd-story-portrait-woman-mask.svg' | asset_url }}'); --use-man-mask: url('{{ 'elevd-story-portrait-man-mask.svg' | asset_url }}'); --use-line-row: url('{{ 'elevd-use-line-row.svg' | asset_url }}'); --use-line-vertical: url('{{ 'elevd-use-line-vertical.svg' | asset_url }}');">
+  <div class="elevd-use__canvas">
+    <div class="elevd-use__divider" aria-hidden="true"></div>
+    <div class="elevd-use__layout">
+      <div class="elevd-use__intro">
+        <h2 id="ElevdUseHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+        <p>{{ section.settings.description | escape }}</p>
+        {% if section.settings.contact_label != blank %}
+          <span class="elevd-contact elevd-use__contact">{{ section.settings.contact_label | escape }}</span>
+        {% endif %}
+      </div>
+      <div class="elevd-use__stories">
+        <ol class="elevd-use__list" role="list">
+          {% for block in section.blocks limit: 3 %}
+            {% render 'elevd-use-row', block: block, index: forloop.index %}
+          {% endfor %}
+        </ol>
+        <div class="elevd-use__portraits">
+          {% for block in section.blocks %}
+            {% liquid
+              case block.settings.portrait
+                when 'woman'
+                  assign portrait_asset = 'elevd-about-portrait.webp'
+                  assign portrait_width = 4096
+                  assign portrait_height = 2731
+                when 'man'
+                  assign portrait_asset = 'elevd-story-portrait-man.webp'
+                  assign portrait_width = 3648
+                  assign portrait_height = 3648
+                when 'frank'
+                  assign portrait_asset = 'elevd-use-frank.webp'
+                  assign portrait_width = 4096
+                  assign portrait_height = 2731
+                when 'jake'
+                  assign portrait_asset = 'elevd-use-jake.webp'
+                  assign portrait_width = 3256
+                  assign portrait_height = 4096
+                else
+                  assign portrait_asset = 'elevd-use-reinhart.webp'
+                  assign portrait_width = 4096
+                  assign portrait_height = 2731
+              endcase
+            %}
+            <div class="elevd-use__photo elevd-use__photo--{{ block.settings.portrait }}">
+              {% render 'elevd-story-image', image: block.settings.image, fallback: portrait_asset, width: portrait_width, height: portrait_height, alt: block.settings.image_alt, sizes: '(min-width: 1920px) 134px, (min-width: 900px) 7vw, (min-width: 600px) 80px, 18vw' %}
+            </div>
+          {% endfor %}
+        </div>
+        {% if section.blocks.size > 3 %}
+          <ol class="elevd-use__list elevd-use__list--last" start="4" role="list">
+            {% for block in section.blocks offset: 3 %}
+              {% assign story_index = forloop.index | plus: 3 %}
+              {% render 'elevd-use-row', block: block, index: story_index %}
+            {% endfor %}
+          </ol>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Elevd user stories",
+  "tag": "div",
+  "class": "elevd-use-section",
+  "enabled_on": { "templates": ["index"] },
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How People Use elevd." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "From daily rituals to full transformations — AI adapts to every lifestyle." },
+    { "type": "text", "id": "contact_label", "label": "Contact label", "default": "Get In Touch" }
+  ],
+  "blocks": [{
+    "type": "story",
+    "name": "User story",
+    "settings": [
+      { "type": "text", "id": "name", "label": "Name", "default": "Alex Rivera" },
+      { "type": "text", "id": "number", "label": "Number", "info": "Leave blank to number stories automatically." },
+      { "type": "text", "id": "topic", "label": "Topic", "default": "Morning Routine" },
+      { "type": "select", "id": "portrait", "label": "Original portrait", "options": [
+        { "value": "woman", "label": "Woman in mustard top" },
+        { "value": "man", "label": "Man in dark shirt" },
+        { "value": "frank", "label": "Portrait 3" },
+        { "value": "jake", "label": "Portrait 4" },
+        { "value": "reinhart", "label": "Portrait 5" }
+      ], "default": "woman" },
+      { "type": "image_picker", "id": "image", "label": "Portrait replacement" },
+      { "type": "text", "id": "image_alt", "label": "Portrait description", "default": "Portrait of a person" }
+    ]
+  }],
+  "presets": [{
+    "name": "Elevd user stories",
+    "blocks": [
+      { "type": "story", "settings": { "name": "Alex Rivera", "topic": "Morning Routine", "portrait": "woman", "image_alt": "Woman in a mustard top against a warm background" } },
+      { "type": "story", "settings": { "name": "Mira Salim", "topic": "Work-From-Home Setup", "portrait": "man", "image_alt": "Man in a dark shirt against a light background" } },
+      { "type": "story", "settings": { "name": "Jordan Cho", "topic": "Adaptive Layouts", "portrait": "frank", "image_alt": "Man in a pink shirt against an orange background" } },
+      { "type": "story", "settings": { "name": "Clara N.", "topic": "Mood-Aware Spaces", "portrait": "jake", "image_alt": "Woman with dark hair tied up against a light background" } },
+      { "type": "story", "settings": { "name": "Rafi Qamar", "topic": "Evening Comfort", "portrait": "reinhart", "image_alt": "Man wearing glasses and a brown hoodie against a grey background" } }
+    ]
+  }]
+}
+{% endschema %}

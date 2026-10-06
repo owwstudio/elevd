@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "elevd_hero": {
@@ -63,7 +72,7 @@
             "label": "Morning",
             "title": "A gentler start.",
             "description": "Daylight fills the room, setting a calm rhythm for the day ahead.",
-            "status": "Natural daylight \u00b7 A fresh start",
+            "status": "Natural daylight · A fresh start",
             "mode": "morning",
             "image_alt": "Modern concrete and timber living room in soft morning sunlight"
           }
@@ -74,7 +83,7 @@
             "label": "Focus",
             "title": "Space for your best ideas.",
             "description": "Balanced light and a quiet atmosphere help you settle into the things that matter.",
-            "status": "Balanced light \u00b7 Ready to focus",
+            "status": "Balanced light · Ready to focus",
             "mode": "focus",
             "image_alt": "The same concrete and timber living room in balanced midday light"
           }
@@ -85,7 +94,7 @@
             "label": "Evening",
             "title": "Come home to calm.",
             "description": "Warm lighting softens the room as your home settles into the evening with you.",
-            "status": "Warm lighting \u00b7 Time to unwind",
+            "status": "Warm lighting · Time to unwind",
             "mode": "evening",
             "image_alt": "The same living room at blue hour with warm evening lights"
           }
@@ -97,11 +106,146 @@
         "evening"
       ],
       "settings": {}
+    },
+    "elevd_about": {
+      "type": "elevd-about",
+      "blocks": {
+        "co_created": {
+          "type": "feature",
+          "settings": {
+            "default_image": "portrait",
+            "caption": "Co-created with you.",
+            "image_alt": "Woman in a mustard top against a warm background"
+          }
+        },
+        "context": {
+          "type": "feature",
+          "settings": {
+            "default_image": "architecture",
+            "caption": "Shaped by context.",
+            "image_alt": "Angular house roof and timber chimney beneath a cloudy sky"
+          }
+        }
+      },
+      "block_order": [
+        "co_created",
+        "context"
+      ],
+      "settings": {}
+    },
+    "elevd_logo_loop": {
+      "type": "elevd-logo-loop",
+      "blocks": {
+        "smart_layouts": {
+          "type": "capability",
+          "settings": {
+            "text": "Smart Layouts"
+          }
+        },
+        "human_stories": {
+          "type": "capability",
+          "settings": {
+            "text": "Human Stories"
+          }
+        },
+        "material_intelligence": {
+          "type": "capability",
+          "settings": {
+            "text": "Material Intelligence"
+          }
+        },
+        "energy_efficiency": {
+          "type": "capability",
+          "settings": {
+            "text": "Energy Efficiency"
+          }
+        },
+        "mood_lighting": {
+          "type": "capability",
+          "settings": {
+            "text": "Mood & Lighting"
+          }
+        }
+      },
+      "block_order": [
+        "smart_layouts",
+        "human_stories",
+        "material_intelligence",
+        "energy_efficiency",
+        "mood_lighting"
+      ],
+      "settings": {}
+    },
+    "elevd_story": {
+      "type": "elevd-story",
+      "settings": {}
+    },
+    "elevd_use": {
+      "type": "elevd-use",
+      "blocks": {
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "name": "Alex Rivera",
+            "topic": "Morning Routine",
+            "portrait": "woman",
+            "image_alt": "Woman in a mustard top against a warm background"
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "name": "Mira Salim",
+            "topic": "Work-From-Home Setup",
+            "portrait": "man",
+            "image_alt": "Man in a dark shirt against a light background"
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "name": "Jordan Cho",
+            "topic": "Adaptive Layouts",
+            "portrait": "frank",
+            "image_alt": "Man in a pink shirt against an orange background"
+          }
+        },
+        "story_4": {
+          "type": "story",
+          "settings": {
+            "name": "Clara N.",
+            "topic": "Mood-Aware Spaces",
+            "portrait": "jake",
+            "image_alt": "Woman with dark hair tied up against a light background"
+          }
+        },
+        "story_5": {
+          "type": "story",
+          "settings": {
+            "name": "Rafi Qamar",
+            "topic": "Evening Comfort",
+            "portrait": "reinhart",
+            "image_alt": "Man wearing glasses and a brown hoodie against a grey background"
+          }
+        }
+      },
+      "block_order": [
+        "story_1",
+        "story_2",
+        "story_3",
+        "story_4",
+        "story_5"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "elevd_hero",
     "elevd_partners",
-    "elevd_day"
+    "elevd_day",
+    "elevd_about",
+    "elevd_logo_loop",
+    "elevd_story",
+    "elevd_use"
   ]
 }

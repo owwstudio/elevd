@@ -1,0 +1,7 @@
+<li class="elevd-use__row" {{ block.shopify_attributes }}>
+  <div class="elevd-use__identity">
+    <span class="elevd-use__name">{{ block.settings.name | escape }}</span>
+    <span class="elevd-use__number">{% if block.settings.number != blank %}{{ block.settings.number | escape }}{% else %}{{ index | prepend: '0' }}{% endif %}</span>
+  </div>
+  <span class="elevd-use__topic">{{ block.settings.topic | escape }}</span>
+</li>

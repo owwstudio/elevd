@@ -1,0 +1,5 @@
+{% if image != blank %}
+  {{ image | image_url: width: 1800 | image_tag: widths: '360, 720, 1200, 1800', sizes: sizes, loading: 'lazy', alt: alt, class: 'elevd-story__replacement' }}
+{% else %}
+  <img class="elevd-story__source" src="{{ fallback | asset_url }}" width="{{ width }}" height="{{ height }}" loading="lazy" alt="{{ alt | escape }}">
+{% endif %}

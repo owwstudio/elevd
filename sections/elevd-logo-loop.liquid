@@ -1,0 +1,42 @@
+{{ 'elevd-logo-loop.css' | asset_url | stylesheet_tag }}
+<section id="ElevdLogoLoop-{{ section.id }}" class="elevd-logo-loop" aria-label="{{ section.settings.label | escape }}">
+  <ul class="elevd-logo-loop__list" role="list">
+    {% for block in section.blocks %}
+      <li class="elevd-logo-loop__item" role="listitem">
+        <span class="elevd-logo-loop__label" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</span>
+        {% unless forloop.last %}
+          <img class="elevd-logo-loop__separator" src="{{ 'elevd-cube.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy" aria-hidden="true">
+        {% endunless %}
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% schema %}
+{
+  "name": "Elevd logo loop",
+  "tag": "div",
+  "class": "elevd-logo-loop-section",
+  "enabled_on": { "templates": ["index"] },
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Accessible section label", "default": "Elevd capabilities" }
+  ],
+  "blocks": [{
+    "type": "capability",
+    "name": "Capability",
+    "settings": [
+      { "type": "text", "id": "text", "label": "Label", "default": "Smart Layouts" }
+    ]
+  }],
+  "presets": [{
+    "name": "Elevd logo loop",
+    "blocks": [
+      { "type": "capability", "settings": { "text": "Smart Layouts" } },
+      { "type": "capability", "settings": { "text": "Human Stories" } },
+      { "type": "capability", "settings": { "text": "Material Intelligence" } },
+      { "type": "capability", "settings": { "text": "Energy Efficiency" } },
+      { "type": "capability", "settings": { "text": "Mood & Lighting" } }
+    ]
+  }]
+}
+{% endschema %}

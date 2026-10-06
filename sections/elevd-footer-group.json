@@ -1,0 +1,17 @@
+{
+  "name": "Elevd footer",
+  "type": "footer",
+  "sections": {
+    "elevd_footer": {
+      "type": "elevd-footer",
+      "blocks": {
+        "twitter": { "type": "social", "settings": { "label": "Twitter" } },
+        "instagram": { "type": "social", "settings": { "label": "Instagram" } },
+        "linkedin": { "type": "social", "settings": { "label": "Linkedin" } }
+      },
+      "block_order": ["twitter", "instagram", "linkedin"],
+      "settings": {}
+    }
+  },
+  "order": ["elevd_footer"]
+}

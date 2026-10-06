@@ -345,9 +345,11 @@
       {{ content_for_layout }}
     </main>
 
-    {% unless template.name == 'index' %}
+    {% if template.name == 'index' %}
+      {% sections 'elevd-footer-group' %}
+    {% else %}
       {% sections 'footer-group' %}
-    {% endunless %}
+    {% endif %}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

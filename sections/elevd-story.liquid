@@ -1,0 +1,99 @@
+{{ 'elevd-story.css' | asset_url | stylesheet_tag }}
+<section id="ElevdStory-{{ section.id }}" class="elevd-story" aria-labelledby="ElevdStoryHeading-{{ section.id }}" style="--story-home-mask: url('{{ 'elevd-story-home-mask.svg' | asset_url }}'); --story-roof-mask: url('{{ 'elevd-story-roof-mask.svg' | asset_url }}'); --story-man-mask: url('{{ 'elevd-story-portrait-man-mask.svg' | asset_url }}'); --story-woman-mask: url('{{ 'elevd-story-portrait-woman-mask.svg' | asset_url }}'); --story-line-short: url('{{ 'elevd-story-line-short.svg' | asset_url }}'); --story-line-full: url('{{ 'elevd-story-line-full.svg' | asset_url }}'); --story-line-vertical: url('{{ 'elevd-story-line-vertical.svg' | asset_url }}');">
+  <div class="elevd-story__canvas">
+    <div class="elevd-story__top">
+      <div class="elevd-story__line-vertical" aria-hidden="true"></div>
+      <div class="elevd-story__intro">
+        <h2 id="ElevdStoryHeading-{{ section.id }}">{{ section.settings.intro_heading | escape | newline_to_br }}</h2>
+        <p>{{ section.settings.intro_description | escape }}</p>
+      </div>
+      <div class="elevd-story__homes">
+        <div class="elevd-story__photo elevd-story__photo--curved-home">
+          {% render 'elevd-story-image', image: section.settings.curved_home, fallback: 'elevd-story-curved-home.webp', width: 4096, height: 2304, alt: section.settings.curved_home_alt, sizes: '(min-width: 1100px) 25vw, (min-width: 600px) 45vw, 100vw' %}
+        </div>
+        <div class="elevd-story__photo elevd-story__photo--pavilion">
+          {% render 'elevd-story-image', image: section.settings.pavilion, fallback: 'elevd-story-pavilion.webp', width: 4096, height: 2304, alt: section.settings.pavilion_alt, sizes: '(min-width: 1100px) 25vw, (min-width: 600px) 45vw, 100vw' %}
+        </div>
+      </div>
+      <div class="elevd-story__portraits">
+        <div class="elevd-story__photo elevd-story__photo--man">
+          {% render 'elevd-story-image', image: section.settings.portrait_man, fallback: 'elevd-story-portrait-man.webp', width: 3648, height: 3648, alt: section.settings.portrait_man_alt, sizes: '100px' %}
+        </div>
+        <div class="elevd-story__photo elevd-story__photo--woman">
+          {% render 'elevd-story-image', image: section.settings.portrait_woman, fallback: 'elevd-about-portrait.webp', width: 4096, height: 2731, alt: section.settings.portrait_woman_alt, sizes: '100px' %}
+        </div>
+      </div>
+      <div class="elevd-story__narrative">
+        <p class="elevd-story__statement"><span class="elevd-story__statement-line">{{ section.settings.statement_opening | escape }}</span> {{ section.settings.statement_prefix | escape }} <span class="elevd-story__emphasis">{{ section.settings.statement_emphasis | escape }}</span> {{ section.settings.statement_ending | escape }}</p>
+        <div class="elevd-story__signature">
+          <p class="elevd-story__tagline">{{ section.settings.tagline_prefix | escape }} <strong>{{ section.settings.tagline_emphasis | escape }}</strong> <span>{{ section.settings.tagline_ending | escape }}</span></p>
+          <span class="elevd-story__icon" aria-hidden="true"><img src="{{ 'elevd-story-smiley.svg' | asset_url }}" width="32" height="32" alt="" loading="lazy"></span>
+        </div>
+      </div>
+    </div>
+    <div class="elevd-story__bottom">
+      <div class="elevd-story__masthead">
+        <header class="elevd-story__heading">
+          <p class="elevd-story__eyebrow"><span>{{ section.settings.eyebrow | escape }}</span><span>{{ section.settings.number | escape }}</span></p>
+          <h3>{{ section.settings.heading | escape }}</h3>
+        </header>
+        <p class="elevd-story__year" aria-hidden="true">{{ section.settings.year | escape }}</p>
+        <p class="elevd-story__wordmark" aria-hidden="true">{{ section.settings.wordmark | escape }}<span>.</span></p>
+      </div>
+      <div class="elevd-story__vision">
+        <div class="elevd-story__photo elevd-story__photo--roof">
+          {% render 'elevd-story-image', image: section.settings.roof, fallback: 'elevd-story-roof.webp', width: 4096, height: 2731, alt: section.settings.roof_alt, sizes: '(min-width: 1100px) 50vw, (min-width: 600px) 55vw, 100vw' %}
+        </div>
+        <div class="elevd-story__detail">
+          <span class="elevd-story__icon" aria-hidden="true"><img src="{{ 'elevd-story-crosshair.svg' | asset_url }}" width="32" height="32" alt="" loading="lazy"></span>
+          <div class="elevd-story__copy">
+            <p>{{ section.settings.vision_description | escape }}</p>
+            <p class="elevd-story__closing">{{ section.settings.closing_line | escape }}<br>{{ section.settings.closing_prefix | escape }} <strong>{{ section.settings.closing_brand | escape }}</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Elevd story",
+  "tag": "div",
+  "class": "elevd-story-section",
+  "enabled_on": { "templates": ["index"] },
+  "settings": [
+    { "type": "header", "content": "Built together" },
+    { "type": "textarea", "id": "intro_heading", "label": "Introduction heading", "default": "Built Together,\nNot Just Designed." },
+    { "type": "textarea", "id": "intro_description", "label": "Introduction", "default": "At elevd., we believe homes should be more than structures — they should respond to how you live." },
+    { "type": "image_picker", "id": "curved_home", "label": "Curved home replacement" },
+    { "type": "text", "id": "curved_home_alt", "label": "Curved home description", "default": "Sculptural two-storey home with curved walls and full-height glazing" },
+    { "type": "image_picker", "id": "pavilion", "label": "Pavilion replacement" },
+    { "type": "text", "id": "pavilion_alt", "label": "Pavilion description", "default": "Dome-roofed pavilions overlooking a pond and green landscape" },
+    { "type": "image_picker", "id": "portrait_man", "label": "First portrait replacement" },
+    { "type": "text", "id": "portrait_man_alt", "label": "First portrait description", "default": "Man in a dark shirt against a light background" },
+    { "type": "image_picker", "id": "portrait_woman", "label": "Second portrait replacement" },
+    { "type": "text", "id": "portrait_woman_alt", "label": "Second portrait description", "default": "Woman in a mustard top against a warm background" },
+    { "type": "header", "content": "Home story" },
+    { "type": "text", "id": "statement_opening", "label": "Statement first line", "default": "Every home has a story." },
+    { "type": "text", "id": "statement_prefix", "label": "Statement prefix", "default": "elevd." },
+    { "type": "textarea", "id": "statement_emphasis", "label": "Statement highlighted text", "default": "Makes sure it's written around you — intelligently," },
+    { "type": "textarea", "id": "statement_ending", "label": "Statement muted text", "default": "beautifully, and always in tune with how you live." },
+    { "type": "text", "id": "tagline_prefix", "label": "Tagline prefix", "default": "Homes imagined by" },
+    { "type": "text", "id": "tagline_emphasis", "label": "Tagline emphasized text", "default": "people," },
+    { "type": "text", "id": "tagline_ending", "label": "Tagline ending", "default": "perfected by AI." },
+    { "type": "header", "content": "Design with intelligence" },
+    { "type": "text", "id": "eyebrow", "label": "Section label", "default": "About Us" },
+    { "type": "text", "id": "number", "label": "Section number", "default": "23" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Redefining Home Design with Intelligence." },
+    { "type": "text", "id": "year", "label": "Decorative year", "default": "2025" },
+    { "type": "text", "id": "wordmark", "label": "Decorative wordmark", "default": "elevd" },
+    { "type": "image_picker", "id": "roof", "label": "Roof image replacement" },
+    { "type": "text", "id": "roof_alt", "label": "Roof image description", "default": "Steep dark metal roof of a timber home with a chimney against a cloudy blue sky" },
+    { "type": "textarea", "id": "vision_description", "label": "Vision description", "default": "Imagine waking up in a home that anticipates your needs. One that knows when to brighten your room, when to soften the noise, and when to suggest a layout change — before you even ask." },
+    { "type": "text", "id": "closing_line", "label": "Closing first line", "default": "This is not a vision. This is now." },
+    { "type": "text", "id": "closing_prefix", "label": "Closing second line", "default": "This is" },
+    { "type": "text", "id": "closing_brand", "label": "Closing brand", "default": "elevd." }
+  ],
+  "presets": [{ "name": "Elevd story" }]
+}
+{% endschema %}

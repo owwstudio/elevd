@@ -1,0 +1,106 @@
+{{ 'elevd-about.css' | asset_url | stylesheet_tag }}
+<section id="ElevdAbout-{{ section.id }}" class="elevd-about" aria-labelledby="ElevdAboutHeading-{{ section.id }}" style="--about-brand-mask: url('{{ 'elevd-about-brand-mask.svg' | asset_url }}'); --about-photo-mask: url('{{ 'elevd-about-photo-mask.svg' | asset_url }}'); --about-line-vertical: url('{{ 'elevd-about-line-vertical.svg' | asset_url }}'); --about-line-horizontal: url('{{ 'elevd-about-line-horizontal.svg' | asset_url }}');">
+  <div class="elevd-about__canvas">
+    <div class="elevd-about__line elevd-about__line--vertical" aria-hidden="true"></div>
+    <div class="elevd-about__line elevd-about__line--horizontal" aria-hidden="true"></div>
+    <header class="elevd-about__intro">
+      <p class="elevd-about__eyebrow"><span>{{ section.settings.eyebrow | escape }}</span> <span class="elevd-about__number">{{ section.settings.number | escape }}</span></p>
+      <h2 id="ElevdAboutHeading-{{ section.id }}" class="elevd-about__heading">
+        <span class="elevd-about__heading-line">{{ section.settings.heading | escape }}</span>
+        {{ section.settings.heading_emphasis | escape }} <span class="elevd-about__muted">{{ section.settings.heading_continuation | escape }}</span>
+      </h2>
+      <div class="elevd-about__arrows" aria-hidden="true">
+        <span class="elevd-about__arrow elevd-about__arrow--previous"><img src="{{ 'elevd-about-arrow-left.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy"></span>
+        <span class="elevd-about__arrow elevd-about__arrow--next"><img src="{{ 'elevd-about-arrow-right.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy"></span>
+      </div>
+    </header>
+    {% comment %}Static carousel composition. Navigation and slide behavior will be added separately.{% endcomment %}
+    <div class="elevd-about__stage" data-about-stage>
+      <div class="elevd-about__wordmark" aria-hidden="true">
+        <span>{{ section.settings.wordmark | escape }}</span>
+        <span>{{ section.settings.tagline | escape }}</span>
+      </div>
+      <article class="elevd-about__brand-card">
+        <div class="elevd-about__grain" aria-hidden="true">
+          <img class="elevd-about__grain-back" src="{{ 'elevd-about-grain-back.webp' | asset_url }}" width="4096" height="2658" alt="" loading="lazy">
+          <img class="elevd-about__grain-front" src="{{ 'elevd-about-grain-front.webp' | asset_url }}" width="1024" height="665" alt="" loading="lazy">
+        </div>
+        <div class="elevd-about__brand-words">
+          <span>{{ section.settings.brand_first | escape }}</span>
+          <span>{{ section.settings.brand_middle | escape }}</span>
+          <span>{{ section.settings.brand_last | escape }}</span>
+        </div>
+        <p class="elevd-about__brand-copy">{{ section.settings.brand_description | escape | newline_to_br }}</p>
+      </article>
+      {% for block in section.blocks %}
+        {% liquid
+          if block.settings.default_image == 'architecture'
+            assign fallback_image = 'elevd-about-architecture.webp'
+            assign fallback_width = 3700
+            assign fallback_height = 2500
+          else
+            assign fallback_image = 'elevd-about-portrait.webp'
+            assign fallback_width = 4096
+            assign fallback_height = 2731
+          endif
+        %}
+        <figure class="elevd-about__feature elevd-about__feature--{{ forloop.index }}" {{ block.shopify_attributes }}>
+          <div class="elevd-about__photo elevd-about__photo--{{ block.settings.default_image }}">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 1200 | image_tag: widths: '360, 540, 810, 1200', sizes: '(min-width: 900px) 19vw, (min-width: 600px) 25vw, 44vw', loading: 'lazy', class: 'elevd-about__replacement', alt: block.settings.image_alt }}
+            {% else %}
+              <img class="elevd-about__source-photo" src="{{ fallback_image | asset_url }}" width="{{ fallback_width }}" height="{{ fallback_height }}" alt="{{ block.settings.image_alt | escape }}" loading="lazy">
+            {% endif %}
+          </div>
+          <figcaption>{{ block.settings.caption | escape }}</figcaption>
+        </figure>
+      {% endfor %}
+      <div class="elevd-about__pagination" aria-hidden="true">
+        <img src="{{ 'elevd-about-dot.svg' | asset_url }}" width="10" height="10" alt="" loading="lazy">
+        <img src="{{ 'elevd-about-dot-active.svg' | asset_url }}" width="20" height="20" alt="" loading="lazy">
+        <img src="{{ 'elevd-about-dot.svg' | asset_url }}" width="10" height="10" alt="" loading="lazy">
+      </div>
+      <p class="elevd-about__description">{{ section.settings.description | escape | newline_to_br }}</p>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Elevd about",
+  "tag": "div",
+  "class": "elevd-about-section",
+  "enabled_on": { "templates": ["index"] },
+  "max_blocks": 2,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Section label", "default": "About Us" },
+    { "type": "text", "id": "number", "label": "Section number", "default": "23" },
+    { "type": "text", "id": "heading", "label": "Heading first line", "default": "More than smart and helpful" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading emphasis", "default": "This AI co-designer resides" },
+    { "type": "textarea", "id": "heading_continuation", "label": "Heading muted text", "default": "in your home, optimizing space, anticipating your needs in your life." },
+    { "type": "text", "id": "wordmark", "label": "Large wordmark", "default": "elevd." },
+    { "type": "text", "id": "tagline", "label": "Large tagline", "default": "tagline" },
+    { "type": "text", "id": "brand_first", "label": "Card first word", "default": "elevtd" },
+    { "type": "text", "id": "brand_middle", "label": "Card accent word", "default": "elevted" },
+    { "type": "text", "id": "brand_last", "label": "Card final word", "default": "elevd." },
+    { "type": "textarea", "id": "brand_description", "label": "Card description", "default": "More than a logo — elevd. is your intelligent partner in creating mindful, responsive, and ever-evolving homes.\nDesign isn’t just what you see. It’s how it feels. How it thinks." },
+    { "type": "textarea", "id": "description", "label": "Carousel description", "default": "Architecture that listens.\nAI-informed designs that respond to climate, light, and how you truly live inside your space." }
+  ],
+  "blocks": [{
+    "type": "feature",
+    "name": "About feature",
+    "settings": [
+      { "type": "select", "id": "default_image", "label": "Default image", "options": [{ "value": "portrait", "label": "Portrait" }, { "value": "architecture", "label": "Architecture" }], "default": "portrait" },
+      { "type": "image_picker", "id": "image", "label": "Replacement image" },
+      { "type": "text", "id": "image_alt", "label": "Image description", "default": "Woman in a mustard top against a warm background" },
+      { "type": "text", "id": "caption", "label": "Caption", "default": "Co-created with you." }
+    ]
+  }],
+  "presets": [{
+    "name": "Elevd about",
+    "blocks": [
+      { "type": "feature", "settings": { "default_image": "portrait", "caption": "Co-created with you." } },
+      { "type": "feature", "settings": { "default_image": "architecture", "caption": "Shaped by context.", "image_alt": "Angular house roof and timber chimney beneath a cloudy sky" } }
+    ]
+  }]
+}
+{% endschema %}
